@@ -31,3 +31,6 @@ The project is written for python 3.6, and relies only on psychopy.
 - `source venv/bin/activate` - use the virtual environment
 - `pip install -r requirements.txt` - install the requirements
 - `./run.py` - start the experiment
+
+Experiment designed by Harriet Drinkald. Written by Alexander Lyon
+and Harriet Drinkald.
