@@ -32,5 +32,5 @@ The project is written for python 3.6, and relies only on psychopy.
 - `pip install -r requirements.txt` - install the requirements
 - `./run.py` - start the experiment
 
-Experiment designed by Harriet Drinkald. Written by Alexander Lyon
+Experiment designed by Harriet Drinkald. Experiment written by Alexander Lyon
 and Harriet Drinkald.
