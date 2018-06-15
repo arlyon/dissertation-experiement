@@ -32,5 +32,10 @@ The project is written for python 3.6, and relies only on psychopy.
 - `pip install -r requirements.txt` - install the requirements
 - `./run.py` - start the experiment
 
+The project can also be run as a pyinstaller executable.
+
+- `pip install pyinstaller`
+- `python -m pyinstaller pyinstaller.spec -y`
+
 Experiment designed by Harriet Drinkald. Experiment written by Alexander Lyon
 and Harriet Drinkald.
