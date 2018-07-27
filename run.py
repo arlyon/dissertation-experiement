@@ -39,7 +39,8 @@ def create_sign_phase(meaning_text, sign_file) -> Phase:
                                  size=(530, 300))
         meaning = visual.TextStim(window, meaning_text, pos=(0, -5))
 
-        responsive_wait([sign, meaning], sign.duration * 2)
+        responsive_wait([sign], sign.duration)
+        responsive_wait([sign, meaning], sign.duration)
 
     def test():
         """
@@ -104,11 +105,13 @@ def create_word_phase(meaning_text, word_file) -> Phase:
         word = sound.Sound(value=app_folder(f"sound/{word_file}"))
         meaning = visual.TextStim(window, meaning_text, pos=(0, 0))
 
-        responsive_wait([meaning], 1)
+        responsive_wait([], 1)
 
-        for i in range(2):
-            word.play()
-            responsive_wait([meaning], 3)
+        word.play()
+        responsive_wait([], 3)
+
+        word.play()
+        responsive_wait([meaning], 3)
 
         responsive_wait([meaning], 1)
 
@@ -287,21 +290,28 @@ if __name__ == '__main__':
     pid = intro_dialog.data[0]
     hearing = True if intro_dialog.data[1] == "yes" else False
 
-    count_signs = 0 if hearing else 36
-    count_words = 4 if hearing else 0
+    count_signs = 12 if hearing else 24
+    count_words = 12 if hearing else 0
     phases = generate_experiment(data, count_words, count_signs)
 
     show_message(
         "Welcome! Thank you for taking part in this experiment. It should take no more than 30 minutes. Press any key to continue.")
     show_message(
-        f"You will now see {(str(count_signs) + ' novel signs') if count_signs else ''}{' and ' if count_signs and count_words else ''}{(str(count_words) + ' novel words') if count_words else ''}. {'Each sign will be shown twice. ' if count_signs else ''}Try to remember as many as possible. Press any key to begin.")
+        f"You will now see {(str(count_signs) + ' novel signs') if count_signs else ''}{' and ' if count_signs and count_words else ''}{(str(count_words) + ' novel words') if count_words else ''} three times. Each {'sign' if count_signs else ''}{' and ' if count_signs and count_words else ''}{'word' if count_words else ''} will be displayed twice. Try to remember the meaning of as many as possible. Press any key to begin.")
 
     random.shuffle(phases)
     for phase in phases:
         phase.show()
 
     show_message(
-        f"You have now seen all the novel {'signs' if count_signs else ''}{' and ' if count_signs and count_words else ''}{'words' if count_words else ''} once. You will see them once more. Feel free to take a short break. Press any key to continue.")
+        f"You have now seen all the novel {'signs' if count_signs else ''}{' and ' if count_signs and count_words else ''}{'words' if count_words else ''} once. You will see them once more. Press any key to continue.")
+
+    random.shuffle(phases)
+    for phase in phases:
+        phase.show()
+
+    show_message(
+        f"You have now seen all the novel {'signs' if count_signs else ''}{' and ' if count_signs and count_words else ''}{'words' if count_words else ''} twice. You will see them a last time. Feel free to take a short break. Press any key to continue.")
 
     random.shuffle(phases)
     for phase in phases:
